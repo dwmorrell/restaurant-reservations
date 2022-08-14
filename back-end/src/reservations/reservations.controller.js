@@ -214,3 +214,42 @@ async function edit(req, res) {
   res.status(200).json({ data: updatedRes[0] });
 
 };
+
+async function list(req, res) {
+
+  if (req.query.date) {
+    const { date } = req.query;
+    let data = [];
+    data = await service.list(date);
+    res.json({ data });
+  } else if (req.query.mobile_number) {
+    const { mobile_number } = req.query;
+    let data = [];
+    data = await service.search(mobile_number);
+    res.json({ data });
+  }
+
+}
+
+function read(req, res) {
+  res.status(200).json({ data: res.locals.reservation });
+}
+
+async function updateStatus(req, res) {
+  let resId = req.params.reservation_id;
+  resId = Number(resId);
+
+  const newStatus = req.body.data.status;
+
+  const updatedReservation = await service.update(resId, newStatus);
+
+  res.status(200).json({ data: updatedReservation[0] });
+}
+
+module.exports = {
+  create: [validRes, validFuture, validTime, asyncErrorBoundary(create)],
+  edit: [asyncErrorBoundary(resExists), validRes, validFuture, validTime, asyncErrorBoundary(edit)],
+  list: asyncErrorBoundary(list),
+  read: [asyncErrorBoundary(resExists), read],
+  update: [asyncErrorBoundary(resExists), validStatus, asyncErrorBoundary(updateStatus)],
+};
