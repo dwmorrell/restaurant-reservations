@@ -32,6 +32,7 @@ function Routes() {
   function loadDashboard() {
     const abortController = new AbortController();
     setReservationsError(null);
+    console.log(date);
     listReservations({ date }, abortController.signal)
       .then(setReservations)
       .catch(setReservationsError);
@@ -47,7 +48,7 @@ function Routes() {
         <CreateReservation />
       </Route>
       <Route path="/reservations/:reservation_id/edit">
-        <EditReservation loadDashboard={loadDashboard}/>
+        <EditReservation />
       </Route>
       <Route path="/reservations/:reservation_id/seat">
         <ReservationSeat />

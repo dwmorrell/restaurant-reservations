@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { cancelReservation } from "../utils/api";
+import ErrorAlert from "../layout/ErrorAlert";
 
 function Reservation({reservations}) {
 
@@ -27,6 +28,7 @@ function Reservation({reservations}) {
 
     return (
         <div>
+            <ErrorAlert error={error} />
             <table>
                 <thead>
                     <tr>
@@ -42,7 +44,6 @@ function Reservation({reservations}) {
                     </tr>
                 </thead>
                 <tbody>
-                    {/* If the reservation is finished, dont show that reservation */}
                     {reservations.map((reservation) => 
                         reservation.status === "finished" ? "" : 
                             <tr key={reservation.reservation_id}>

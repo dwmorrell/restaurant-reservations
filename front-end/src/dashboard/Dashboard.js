@@ -1,7 +1,5 @@
 import React from "react";
 import ErrorAlert from "../layout/ErrorAlert";
-
-
 import Reservation from "../reservations/Reservation";
 import Table from "../tables/Table";
 

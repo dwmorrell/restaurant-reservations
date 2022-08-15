@@ -27,7 +27,7 @@ function EditReservation() {
         <div>
             <ErrorAlert error={reservationsError} />
             <ReservationForm 
-                props={ {isNew: false, passedReservation: reservation, loadReservation} } 
+                props={ {isNew: false, passedReservation: reservation} } 
             />
         </div>
     );
