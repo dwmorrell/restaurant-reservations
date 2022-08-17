@@ -3,12 +3,7 @@ import { useHistory } from "react-router-dom";
 import { createTable } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert.js";
 
-function TableForm({ 
-    editTableName = "",
-    editCapacity = "",
-    editId = "",
-    isNew
-}) {
+function TableForm() {
 
     // useState functions
     const[error, setError] = useState(null);
@@ -47,7 +42,7 @@ function TableForm({
                 <table>
                     <thead>
                         <tr>
-                            <th colspan="2">
+                            <th colSpan="2">
                                 <h1>Make a Table</h1>
                             </th>
                         </tr>

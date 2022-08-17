@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { clearTable, listTables } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
@@ -9,6 +9,8 @@ function Table() {
 
     const [table, setTable] = useState([]);
     const [tableError, setTableError] = useState(null);
+
+
 
     useEffect(function () {
 

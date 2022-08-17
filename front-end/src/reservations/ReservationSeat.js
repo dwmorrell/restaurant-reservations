@@ -2,24 +2,20 @@ import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import ErrorAlert from "../layout/ErrorAlert";
 import { listTables, seatReservation } from "../utils/api";
-
-// Import Table component to show all tables and their status
 import Table from "../tables/Table";
 
-function ReservationSeat() {
+function ReservationSeat({ loadDashboard }) {
 
-    // Obtain the useHistory to assist with page navigation
     const history = useHistory();
-
-    // Obtain the Reservation ID that is being seated.
+ 
     const reservationId = useParams().reservation_id;
 
-    // Create useStates for the array of tables.
+    // useState functions
     const [table, setTable] = useState([]);
     const [tableId, setTableId] = useState(1);
     const [tableError, setTableError] = useState(null);
 
-    useEffect(function () {
+    useEffect(() => {
 
         const abortController = new AbortController();
         setTableError(null);
@@ -39,6 +35,7 @@ function ReservationSeat() {
         try {
             await seatReservation(reservationId, tableId);
             history.push(`/dashboard`);
+            await loadDashboard();
 
         } catch(error) {
             setTableError(error);
@@ -75,7 +72,7 @@ function ReservationSeat() {
                     Submit
                 </button> 
 
-                {/* Displays the cancel button and navigates back 1 page */}
+                {/* Displays the cancel button and navigates back 1 page if selected */}
                 <button 
                 className="btn btn-secondary" 
 				onClick={(event) => {
@@ -87,7 +84,7 @@ function ReservationSeat() {
                 </button>
             </form>
 
-            <h1>Here's the table info:</h1>
+            <h3>Here's the table info:</h3>
             <Table />
             <ErrorAlert error={tableError} />
         </div>

@@ -1,22 +1,15 @@
 import React, { useState } from "react";
 import ErrorAlert from "../layout/ErrorAlert.js";
-import { cancelReservation, listReservations, searchReservation } from "../utils/api.js";
+import { useHistory } from "react-router-dom";
+import { cancelReservation, searchReservation } from "../utils/api.js";
 
 function ReservationSearch() {
 
+    const history = useHistory();
     // useState functions
     const [reservations, setReservations] = useState([]);
     const [reservationsError, setReservationsError] = useState(null);
     const [mobileNumber, setMobileNumber] = useState("");
-
-    function loadReservations() {
-        const abortController = new AbortController();
-        setReservationsError(null);
-        listReservations({ "mobile_number": mobileNumber }, abortController.signal)
-          .then(setReservations)
-          .catch(setReservationsError);
-        return () => abortController.abort();
-    }
 
     const handleCancelReservation = async function (event) {
         event.preventDefault();
@@ -26,7 +19,7 @@ function ReservationSearch() {
             const result = window.confirm("Do you want to cancel this reservation? This cannot be undone.");
             if (result) {
                 await cancelReservation(reservation_id);
-                loadReservations();
+                history.go();
             }
         } catch(error) {
             setReservationsError(error);
@@ -94,13 +87,13 @@ function ReservationSearch() {
                     {reservations.length === 0 ? ""
                     : reservations.map((reservation) => 
                         <tr key={reservation.reservation_id}>
-                            <td> {reservation.first_name} </td>
-                            <td> {reservation.last_name} </td>
-                            <td> {reservation.mobile_number} </td>
-                            <td> {reservation.reservation_date} </td>
-                            <td> {reservation.reservation_time} </td>
-                            <td> {reservation.people} </td>
-                            <td data-reservation-id-status={reservation.reservation_id}> {reservation.status} </td>
+                            <td>{reservation.first_name}</td>
+                            <td>{reservation.last_name}</td>
+                            <td>{reservation.mobile_number}</td>
+                            <td>{reservation.reservation_date}</td>
+                            <td>{reservation.reservation_time}</td>
+                            <td>{reservation.people}</td>
+                            <td data-reservation-id-status={reservation.reservation_id}>{reservation.status}</td>
                             <td>
                                 {/* Displays the Seat button */}
                                 {reservation.status === "booked" ?                             
@@ -124,7 +117,7 @@ function ReservationSearch() {
                             <td>
                                 {/* Displays the Cancel button */}
                                 {reservation.status === "booked" ?                             
-                                        <button 
+                                    <button 
                                         className="btn btn-primary ml-2"
                                         data-reservation-id-cancel={reservation.reservation_id}
                                         onClick={handleCancelReservation}

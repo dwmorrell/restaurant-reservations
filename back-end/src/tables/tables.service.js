@@ -26,6 +26,13 @@ function read(table_id) {
         
 };
 
+// function seatUpdate(reservation_id, table_id) {
+//     return knex("tables")
+//         .select("*")
+//         .where({ table_id })
+//         .update({ reservation_id: reservation_id})
+// }
+
 async function seatUpdate(reservation_id, table_id) {
 
     return await knex.transaction(async trx => {
@@ -40,19 +47,20 @@ async function seatUpdate(reservation_id, table_id) {
             .where({ reservation_id })
             .update({ status: "seated" }, "*")
 
-        return updatedTables;
+        return updatedTables[0];
     });
 
 };
 
-async function clear(reservation_id, table_id) {
+
+async function clear(table_id, reservation_id) {
 
     return await knex.transaction(async trx => {
 
         const updatedTables = await trx("tables")
             .select("*")
             .where({ table_id })
-            .update({ "reservation_id": null }, "*")
+            .update({ reservation_id: null }, "*")
 
         await trx("reservations")
             .select("*")

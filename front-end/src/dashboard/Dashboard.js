@@ -9,7 +9,13 @@ import Table from "../tables/Table";
  *  the date for which the user wants to view reservations.
  * @returns {JSX.Element}
  */
-function Dashboard({ date, reservations, reservationsError}) {
+function Dashboard({ 
+  date,
+  reservations,
+  reservationsError,
+  tables,
+  tablesError,
+  loadDashboard }) {
 
   return (
     <main>
@@ -18,8 +24,15 @@ function Dashboard({ date, reservations, reservationsError}) {
         <h4 className="mb-0">Reservations for {date}</h4>
       </div>
       <ErrorAlert error={reservationsError} />
-      <Reservation reservations={reservations} />
-      <Table />
+      <ErrorAlert error={tablesError} />
+      <Reservation 
+        reservations={reservations}
+        loadDashboard={loadDashboard} 
+      />
+      <Table 
+        tables={tables}
+        tablesError={tablesError} 
+      />
     </main>
   );
 }

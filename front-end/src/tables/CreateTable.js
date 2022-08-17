@@ -5,7 +5,7 @@ function CreateTable() {
 
     return (
         <div>
-            <TableForm isNew={true} />
+            <TableForm />
         </div>
     );
 

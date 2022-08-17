@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { createReservation, editReservation } from "../utils/api";
-
+import { today, formatAsTime } from "../utils/date-time";
 import ErrorAlert from "../layout/ErrorAlert.js";
 
-function ReservationForm( {props} ) {
+function ReservationForm( {foundReservation, edit, loadReservation} ) {
+    
+    
+    edit ? edit = true : edit = false;
 
-    const isNew = props.isNew;
 
     // useState functions
     const[error, setError] = useState(null);
@@ -14,19 +16,19 @@ function ReservationForm( {props} ) {
         first_name: "",
         last_name: "",
         mobile_number: "",
-        reservation_date: "",
-        reservation_time: "",
-        people: ""
+        reservation_date: today(),
+        reservation_time: formatAsTime(new Date().toTimeString()),
+        people: 1
     });
 
     const history = useHistory();
 
     // useEffect functions
     useEffect(() => {
-        if(!isNew && props.passedReservation.first_name) {
-            setReservation(props.passedReservation);
+        if(edit && foundReservation) {
+            setReservation(foundReservation);
         }
-    }, [isNew, props.passedReservation]);
+    }, [edit, foundReservation]);
 
      /**
      * Handler for submit function
@@ -36,21 +38,39 @@ function ReservationForm( {props} ) {
 		event.preventDefault();
         const abortController = new AbortController();
         try {
-            if(isNew) {
-                let result = await createReservation(reservation, abortController.signal);
-                let reservationDate = result.reservation_date;
-                history.push(`/dashboard?date=${reservationDate}`);
+            if(edit && validateFields()) {
+                    let result = await editReservation(reservation, abortController.signal);
+                    let reservationDate = result.reservation_date;
+                    history.push(`/dashboard?date=${reservationDate}`);
             } else {
-                let result = await editReservation(reservation, abortController.signal);
-                let reservationDate = result.reservation_date;
-                await props.loadReservation();
-                history.push(`/dashboard?date=${reservationDate}`);
+                    let result = await createReservation(reservation, abortController.signal);
+                    let reservationDate = result.reservation_date;
+                    history.push(`/dashboard?date=${reservationDate}`);
+                    await loadReservation();
             }
         } catch(error) {
             setError(error);
             return () => abortController.abort();
         }
 	};
+
+    function validateFields() {
+
+        let foundErrors = [];
+
+        if (typeof(reservation.people) !== "number") {
+            reservation.people = Number(reservation.people);
+        }
+        for (const field in reservation) {
+          if (reservation[field] === "") {
+            foundErrors.push({
+              message: `${field.split("_").join(" ")} cannot be left blank.`,
+            });
+          }
+        }
+        setError(foundErrors);
+        return foundErrors.length === 0;
+      }
 
     /**
      * Handler for changes to various fields
@@ -70,8 +90,8 @@ function ReservationForm( {props} ) {
                 <table>
                     <thead>
                         <tr>
-                            <th colspan="2">
-                                {isNew ? 
+                            <th colSpan="2">
+                                {!edit ? 
                                 <h1>Make a Reservation</h1>
                                 : <h1>Edit a Reservation</h1> }
                             </th>

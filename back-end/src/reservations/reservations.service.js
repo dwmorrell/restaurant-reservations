@@ -1,11 +1,19 @@
 const knex = require("../db/connection");
 
-const list = (date) => {
+// const list = (date) => {
+//   return knex("reservations")
+//     .select("*")
+//     .where({ reservation_date: date })
+//     .whereNot({ status: "finished" })
+//     .orderBy("reservation_time");
+// }
+
+function list(date) {
   return knex("reservations")
-    .select("*")
-    .where({ reservation_date: date })
-    .whereNot({ status: finished })
-    .orderBy("reservation_time");
+      .select("*")
+      .where({reservation_date: date})
+      .whereNot({ status: "finished" })
+      .orderBy("reservation_time");
 }
 
 const read = (resId) => {
@@ -30,11 +38,12 @@ const edit = (reservation_id, reservation) => {
     const reservation_date = reservation.reservation_date;
     const reservation_time = reservation.reservation_time;
     const people = reservation.people;
+    const status = reservation.status;
 
   return knex("reservations")
     .select("*")
     .where({ reservation_id })
-    .update({ first_name, last_name, mobile_number, reservation_date, reservation_time, people }, "*")
+    .update({ first_name, last_name, mobile_number, reservation_date, reservation_time, people, status }, "*")
 }
 
 const search = (mobile_number) => {

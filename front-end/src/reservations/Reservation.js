@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { cancelReservation } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
 
-function Reservation({reservations}) {
+function Reservation({ reservations, loadDashboard }) {
 
     const history = useHistory();
 
@@ -20,6 +20,7 @@ function Reservation({reservations}) {
             if (result) {
                 await cancelReservation(reservation_id);
                 history.go();
+                await loadDashboard();
             }
         } catch(error) {
             setError(error);
@@ -47,12 +48,12 @@ function Reservation({reservations}) {
                     {reservations.map((reservation) => 
                         reservation.status === "finished" ? "" : 
                             <tr key={reservation.reservation_id}>
-                                <td> {reservation.first_name} </td>
-                                <td> {reservation.last_name} </td>
-                                <td> {reservation.mobile_number} </td>
-                                <td> {reservation.reservation_time}</td>
-                                <td> {reservation.people}</td>
-                                <td data-reservation-id-status={reservation.reservation_id}> {reservation.status} </td>
+                                <td>{reservation.first_name}</td>
+                                <td>{reservation.last_name}</td>
+                                <td>{reservation.mobile_number}</td>
+                                <td>{reservation.reservation_time}</td>
+                                <td>{reservation.people}</td>
+                                <td data-reservation-id-status={reservation.reservation_id}>{reservation.status}</td>
                                 <td>
                                     {/* Displays the Seat button */}
                                     {reservation.status === "booked" ?                             
