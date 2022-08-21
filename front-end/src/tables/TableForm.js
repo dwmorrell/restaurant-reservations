@@ -39,7 +39,7 @@ function TableForm() {
             <form
                 onSubmit={handleCreateSubmit}
             >
-                <table>
+                <table className="table">
                     <thead>
                         <tr>
                             <th colSpan="2">

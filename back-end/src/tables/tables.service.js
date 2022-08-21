@@ -52,6 +52,12 @@ async function seatUpdate(reservation_id, table_id) {
 
 };
 
+// function occupyTable(table_id, reservation_id) {
+//     return knex("tables")
+//       .where({ table_id })
+//       .update({ reservation_id: reservation_id });
+//   }
+
 
 async function clear(table_id, reservation_id) {
 
@@ -78,5 +84,6 @@ module.exports = {
     list,
     read,
     seatUpdate,
+    
 };
 

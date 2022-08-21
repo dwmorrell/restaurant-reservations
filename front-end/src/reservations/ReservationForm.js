@@ -4,11 +4,7 @@ import { createReservation, editReservation } from "../utils/api";
 import { today, formatAsTime } from "../utils/date-time";
 import ErrorAlert from "../layout/ErrorAlert.js";
 
-function ReservationForm( {foundReservation, edit, loadReservation} ) {
-    
-    
-    edit ? edit = true : edit = false;
-
+function ReservationForm( {foundReservation, edit} ) {
 
     // useState functions
     const[error, setError] = useState(null);
@@ -46,7 +42,7 @@ function ReservationForm( {foundReservation, edit, loadReservation} ) {
                     let result = await createReservation(reservation, abortController.signal);
                     let reservationDate = result.reservation_date;
                     history.push(`/dashboard?date=${reservationDate}`);
-                    await loadReservation();
+                    
             }
         } catch(error) {
             setError(error);
@@ -87,7 +83,7 @@ function ReservationForm( {foundReservation, edit, loadReservation} ) {
         <div>
             <ErrorAlert error={error} />
             <form onSubmit={handleSubmit}>
-                <table>
+                <table className="table">
                     <thead>
                         <tr>
                             <th colSpan="2">
@@ -113,7 +109,7 @@ function ReservationForm( {foundReservation, edit, loadReservation} ) {
                         <tr>
                             <td>
                                 <input 
-                                    id="firstName"
+                                    id="first_name"
                                     name="first_name"
                                     onChange={handleChange}
                                     type="text"
@@ -122,7 +118,7 @@ function ReservationForm( {foundReservation, edit, loadReservation} ) {
                             </td>
                             <td>
                                 <input 
-                                    id="lastName"
+                                    id="last_name"
                                     type="text"
                                     name="last_name"
                                     onChange={handleChange} 
@@ -145,7 +141,7 @@ function ReservationForm( {foundReservation, edit, loadReservation} ) {
                         <tr>
                             <td>
                                 <input 
-                                    id="mobileNumber"
+                                    id="mobile_number"
                                     name="mobile_number"
                                     onChange={handleChange} 
                                     value={reservation.mobile_number}
@@ -153,7 +149,7 @@ function ReservationForm( {foundReservation, edit, loadReservation} ) {
                             </td>
                             <td>
                                 <input 
-                                    id="partyPeople"
+                                    id="people"
                                     name="people" 
                                     onChange={handleChange}
                                     value={reservation.people}
@@ -175,7 +171,7 @@ function ReservationForm( {foundReservation, edit, loadReservation} ) {
                         <tr>
                             <td>
                                 <input 
-                                    id="reservationDate"
+                                    id="reservation_date"
                                     type="date"
                                     name="reservation_date" 
                                     onChange={handleChange}
@@ -186,7 +182,7 @@ function ReservationForm( {foundReservation, edit, loadReservation} ) {
                             </td>
                             <td>
                                 <input 
-                                    id="reservationTime"
+                                    id="reservation_time"
                                     type="time" 
                                     name="reservation_time" 
                                     onChange={handleChange}
@@ -213,7 +209,6 @@ function ReservationForm( {foundReservation, edit, loadReservation} ) {
                             <td>
                                 <button 
                                     className="btn btn-secondary" 
-                                    
 					                onClick={(event) => {
 						                event.preventDefault();
 						                history.go(-1);

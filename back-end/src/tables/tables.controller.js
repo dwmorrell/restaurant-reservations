@@ -116,7 +116,7 @@ async function list(req, res) {
 async function seat(req, res) {
     
     const tableId = Number(req.params.table_id);
-    const resId = res.locals.table.reservation_id;
+    const resId = req.body.data.reservation_id;
     const update = await service.seatUpdate(resId, tableId);
 
     res.status(200).json({ data: update });

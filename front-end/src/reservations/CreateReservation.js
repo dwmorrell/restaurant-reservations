@@ -1,11 +1,11 @@
 import React from "react";
 import ReservationForm from "./ReservationForm.js";
 
-function CreateReservation() {
+function CreateReservation({ loadDashboard }) {
 
     return (
         <div>
-            <ReservationForm props={{ isNew: true }}/>
+            <ReservationForm edit={false} loadDashboard={loadDashboard} />
         </div>
     );
 

@@ -34,8 +34,8 @@ function ReservationSeat({ loadDashboard }) {
 		event.preventDefault();
         try {
             await seatReservation(reservationId, tableId);
+            await loadDashboard;
             history.push(`/dashboard`);
-            await loadDashboard();
 
         } catch(error) {
             setTableError(error);
