@@ -5,9 +5,13 @@ import { findReservation } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
 import { today, formatAsTime } from "../utils/date-time";
 
+/**
+ * Defines the EditReservation page.
+ */
 function EditReservation() {
 
     const { reservation_id } = useParams();
+    
     // useState functions
     const [reservation, setReservation] = useState({
         first_name: "",
@@ -19,8 +23,10 @@ function EditReservation() {
     });
     const [reservationsError, setReservationsError] = useState(null);
 
-    // useEffect functions
-
+    /**
+    * useEffect function to search for and load into state the requested reservation for editing
+    * Calls the findReservation API
+    */
     useEffect(() => {
         const abortController = new AbortController();
         setReservationsError(null);

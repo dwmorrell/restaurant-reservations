@@ -3,14 +3,23 @@ import ErrorAlert from "../layout/ErrorAlert.js";
 import { useHistory } from "react-router-dom";
 import { cancelReservation, searchReservation } from "../utils/api.js";
 
+/**
+* Defines the ReservationSearch function
+*/
 function ReservationSearch() {
 
     const history = useHistory();
+
     // useState functions
     const [reservations, setReservations] = useState([]);
     const [reservationsError, setReservationsError] = useState(null);
     const [mobileNumber, setMobileNumber] = useState("");
 
+    /**
+    * Cancel reservation handler with confirmation window warning
+    * Calls the cancelReservation API
+    * @param {event}
+    */
     const handleCancelReservation = async function (event) {
         event.preventDefault();
         const reservation_id = event.target.value;
@@ -26,10 +35,19 @@ function ReservationSearch() {
         }
     }
 
+    /**
+     * Handler for changes to the form field
+     * @param {event} 
+     */
     const handleChange = function (event) {
         setMobileNumber(event.target.value);
     }
 
+    /**
+     * Submit handler to find reservation
+     * Calls the searchReservation API
+     * @param {event}
+     */
     const handleSearchSubmit = async function (event) {
 		event.preventDefault();
         const abortController = new AbortController();
@@ -98,7 +116,7 @@ function ReservationSearch() {
                                 {/* Displays the Seat button */}
                                 {reservation.status === "booked" ?                             
                                     <a href={`/reservations/${reservation.reservation_id}/seat`}>
-                                        <button className="btn btn-primary ml-2">
+                                        <button className="btn btn-secondary ml-2">
                                             Seat
                                         </button>
                                     </a>
@@ -118,7 +136,7 @@ function ReservationSearch() {
                                 {/* Displays the Cancel button */}
                                 {reservation.status === "booked" ?                             
                                     <button 
-                                        className="btn btn-primary ml-2"
+                                        className="btn btn-warning ml-2"
                                         data-reservation-id-cancel={reservation.reservation_id}
                                         onClick={handleCancelReservation}
                                         value={reservation.reservation_id}

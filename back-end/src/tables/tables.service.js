@@ -1,5 +1,12 @@
+/**
+ * Tables service file to query the "tables" database
+ */
+
 const knex = require("../db/connection");
 
+/**
+ * Inserts a table into the tables db
+ */
 function create(table) {
 
     return knex("tables")
@@ -9,6 +16,9 @@ function create(table) {
         
 };
 
+/**
+ * Lists and orders tables from the tables db
+ */
 function list() {
 
     return knex("tables")
@@ -17,6 +27,10 @@ function list() {
 
 };
 
+/**
+ * Reads a table given a table_id
+ * @param {table_id}
+ */
 function read(table_id) {
 
     return knex("tables")
@@ -26,13 +40,10 @@ function read(table_id) {
         
 };
 
-// function seatUpdate(reservation_id, table_id) {
-//     return knex("tables")
-//         .select("*")
-//         .where({ table_id })
-//         .update({ reservation_id: reservation_id})
-// }
-
+/**
+ * Async function to update both table and reservation status
+ * @param {reservation_id, table_id}
+ */
 async function seatUpdate(reservation_id, table_id) {
 
     return await knex.transaction(async trx => {
@@ -52,13 +63,10 @@ async function seatUpdate(reservation_id, table_id) {
 
 };
 
-// function occupyTable(table_id, reservation_id) {
-//     return knex("tables")
-//       .where({ table_id })
-//       .update({ reservation_id: reservation_id });
-//   }
-
-
+/**
+ * Async function to clear a table and change reservation status
+ * @param {reservation_id, table_id}
+ */
 async function clear(table_id, reservation_id) {
 
     return await knex.transaction(async trx => {

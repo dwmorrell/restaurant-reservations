@@ -3,15 +3,21 @@ import { useHistory } from "react-router-dom";
 import { clearTable, listTables } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
 
+/**
+ * Defines the CreateTable component
+ */
 function Table() {
 
     const history = useHistory();
 
+    // useState functions
     const [table, setTable] = useState([]);
     const [tableError, setTableError] = useState(null);
 
-
-
+    /**
+    * useEffect function to list current tables
+    * Calls the listTables API
+    */
     useEffect(function () {
 
         const abortController = new AbortController();
@@ -23,6 +29,11 @@ function Table() {
 
     }, []);
 
+    /**
+    * Clear table handler with confirmation window warning
+    * Calls the clearTable API
+    * @param {table_id}
+    */
     const handleClearTable = async function (table_id) {
         try {
             const result = window.confirm("Is this table ready to seat new guests? This cannot be undone.");

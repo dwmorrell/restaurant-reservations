@@ -4,6 +4,9 @@ import { createReservation, editReservation } from "../utils/api";
 import { today, formatAsTime } from "../utils/date-time";
 import ErrorAlert from "../layout/ErrorAlert.js";
 
+/**
+* Defines the ReservationForm component
+*/
 function ReservationForm( {foundReservation, edit} ) {
 
     // useState functions
@@ -19,7 +22,9 @@ function ReservationForm( {foundReservation, edit} ) {
 
     const history = useHistory();
 
-    // useEffect functions
+    /**
+    * Fills the form fields with reservation info if being edited
+    */
     useEffect(() => {
         if(edit && foundReservation) {
             setReservation(foundReservation);
@@ -28,6 +33,8 @@ function ReservationForm( {foundReservation, edit} ) {
 
      /**
      * Handler for submit function
+     * Calls either the editReservation or createReservation API based on edit truthiness
+     * Will redirect to dashboard on day of reservation
      * @param {event}
      */
 	const handleSubmit = async function (event) {
@@ -50,6 +57,9 @@ function ReservationForm( {foundReservation, edit} ) {
         }
 	};
 
+    /**
+    * Validates form fields on edited reservation
+    */
     function validateFields() {
 
         let foundErrors = [];
@@ -69,8 +79,8 @@ function ReservationForm( {foundReservation, edit} ) {
       }
 
     /**
-     * Handler for changes to various fields
-     * @param {target} param0 
+     * Handler for changes to various form fields
+     * @param {target} 
      */
     const handleChange = ({ target }) => {
         setReservation({
@@ -208,7 +218,7 @@ function ReservationForm( {foundReservation, edit} ) {
                             </td>
                             <td>
                                 <button 
-                                    className="btn btn-secondary" 
+                                    className="btn btn-danger" 
 					                onClick={(event) => {
 						                event.preventDefault();
 						                history.go(-1);

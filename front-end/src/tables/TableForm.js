@@ -3,6 +3,9 @@ import { useHistory } from "react-router-dom";
 import { createTable } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert.js";
 
+/**
+ * Defines the TableForm component
+ */
 function TableForm() {
 
     // useState functions
@@ -14,6 +17,12 @@ function TableForm() {
 
     const history = useHistory();
 
+    /**
+     * Handler for submit function
+     * Calls the createTable API
+     * Will redirect to dashboard after creation
+     * @param {event}
+     */
 	const handleCreateSubmit = async function (event) {
 		event.preventDefault();
         const abortController = new AbortController();
@@ -26,6 +35,10 @@ function TableForm() {
         }
 	};
 
+    /**
+     * Handler for changes to various form fields
+     * @param {target} 
+     */
     const handleChange = ({ target }) => {
         setTable({
             ...table,
@@ -95,7 +108,7 @@ function TableForm() {
                             </td>
                             <td>
                                 <button 
-                                    className="btn btn-secondary" 
+                                    className="btn btn-danger" 
 					                onClick={(e) => {
 						                e.preventDefault();
 						                history.go(-1);

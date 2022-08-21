@@ -1,13 +1,12 @@
+/**
+ * Reservations service file to query the "reservations" database
+ */
 const knex = require("../db/connection");
 
-// const list = (date) => {
-//   return knex("reservations")
-//     .select("*")
-//     .where({ reservation_date: date })
-//     .whereNot({ status: "finished" })
-//     .orderBy("reservation_time");
-// }
-
+/**
+ * Function to list reservations ordered by reservation time
+ * @param {date}
+ */
 function list(date) {
   return knex("reservations")
       .select("*")
@@ -16,6 +15,10 @@ function list(date) {
       .orderBy("reservation_time");
 }
 
+/**
+ * Function to read a reservation given a reservation id
+ * @param {resId}
+ */
 const read = (resId) => {
   return knex("reservations")
     .select("*")
@@ -23,6 +26,10 @@ const read = (resId) => {
     .first();
 }
 
+/**
+ * Function to create a reservation 
+ * @param {reservation}
+ */
 const create = (reservation) => {
   return knex("reservations")
     .insert(reservation)
@@ -30,6 +37,10 @@ const create = (reservation) => {
     .then((createdRecords) => createdRecords[0]);
 }
 
+/**
+ * Function to edit and update a reservation given a reservation id
+ * @param {reservation_id, reservation}
+ */
 const edit = (reservation_id, reservation) => {
 
     const first_name = reservation.first_name;
@@ -46,6 +57,10 @@ const edit = (reservation_id, reservation) => {
     .update({ first_name, last_name, mobile_number, reservation_date, reservation_time, people, status }, "*")
 }
 
+/**
+ * Function to search reservations based on a given mobile_number ordered by reservation date
+ * @param {mobile_number}
+ */
 const search = (mobile_number) => {
   return knex("reservations")
     .whereRaw(
@@ -56,6 +71,10 @@ const search = (mobile_number) => {
 
 }
 
+/**
+ * Async function to update the status of a reservation given a reservation id
+ * @param {reservation_id, status}
+ */
 async function updateStatus(reservation_id, status) {
   return knex("reservations")
     .select("*")

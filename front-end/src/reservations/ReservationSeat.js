@@ -4,6 +4,9 @@ import ErrorAlert from "../layout/ErrorAlert";
 import { listTables, seatReservation } from "../utils/api";
 import Table from "../tables/Table";
 
+/**
+ * Defines the ReserationSeat component
+ */
 function ReservationSeat({ loadDashboard }) {
 
     const history = useHistory();
@@ -15,6 +18,9 @@ function ReservationSeat({ loadDashboard }) {
     const [tableId, setTableId] = useState(1);
     const [tableError, setTableError] = useState(null);
 
+    /**
+     * useEffect function to get the list of tables and save to state
+     */
     useEffect(() => {
 
         const abortController = new AbortController();
@@ -26,15 +32,23 @@ function ReservationSeat({ loadDashboard }) {
 
     }, [table]);
 
+    /**
+     * Handler for changes to the form field
+     * @param {event} 
+     */
     const handleChange = function (event) {
         setTableId(event.target.value);
     }
 
+    /**
+     * Submit handler to change the status of the requested table and reservation
+     * Calls the seatReservation API and redirects to "/dashboard"
+     * @param {event}
+     */
 	const handleSeatSubmit = async function (event) {
 		event.preventDefault();
         try {
             await seatReservation(reservationId, tableId);
-            await loadDashboard;
             history.push(`/dashboard`);
 
         } catch(error) {

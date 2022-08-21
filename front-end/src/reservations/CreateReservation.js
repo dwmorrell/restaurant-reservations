@@ -1,11 +1,14 @@
 import React from "react";
 import ReservationForm from "./ReservationForm.js";
 
-function CreateReservation({ loadDashboard }) {
+/**
+ * Defines the CreateReservation page.
+ */
+function CreateReservation() {
 
     return (
         <div>
-            <ReservationForm edit={false} loadDashboard={loadDashboard} />
+            <ReservationForm edit={false} />
         </div>
     );
 

@@ -3,14 +3,20 @@ import { useHistory } from "react-router-dom";
 import { cancelReservation } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
 
-function Reservation({ reservations, loadDashboard }) {
+/**
+ * Defines the Reservation page.
+ */
+function Reservation({ reservations }) {
 
     const history = useHistory();
 
     // useState function
     const [error, setError] = useState(null);
 
-    // Cancel function handler
+    /**
+    * Cancel reservation handler with confirmation window warning
+    * Calls the cancelReservation API
+    */
     const handleCancelReservation = async function (event) {
         event.preventDefault();
         const reservation_id = event.target.value;
@@ -19,7 +25,6 @@ function Reservation({ reservations, loadDashboard }) {
             const result = window.confirm("Do you want to cancel this reservation? This cannot be undone.");
             if (result) {
                 await cancelReservation(reservation_id);
-                await loadDashboard();
                 history.go();
                 
             }
@@ -60,7 +65,7 @@ function Reservation({ reservations, loadDashboard }) {
                                         {/* Displays the Seat button */}
                                         {reservation.status === "booked" ?                             
                                             <a href={`/reservations/${reservation.reservation_id}/seat`}>
-                                                <button className="btn btn-primary ml-2">
+                                                <button className="btn btn-secondary ml-2">
                                                     Seat
                                                 </button>
                                             </a>
@@ -80,7 +85,7 @@ function Reservation({ reservations, loadDashboard }) {
                                         {/* Displays the cancel button */}
                                         {reservation.status === "booked" ?                             
                                             <button 
-                                                className="btn btn-primary ml-2"
+                                                className="btn btn-danger ml-2"
                                                 data-reservation-id-cancel={reservation.reservation_id}
                                                 onClick={handleCancelReservation}
                                                 value={reservation.reservation_id}
