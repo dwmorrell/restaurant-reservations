@@ -11,19 +11,35 @@ function Table() {
     const history = useHistory();
 
     // useState functions
-    const [table, setTable] = useState([]);
+    const [tables, setTables] = useState([]);
     const [tableError, setTableError] = useState(null);
 
-    /**
-    * useEffect function to list current tables
-    * Calls the listTables API
-    */
-    useEffect(function () {
+    // /**
+    // * useEffect function to list current tables
+    // * Calls the listTables API
+    // */
+    // useEffect(() => {
+
+    //     const abortController = new AbortController();
+
+    //     setTableError(null)
+    
+    //     listTables(abortController.signal)
+    //         .then((tables) =>
+    //         tables.sort((tableA, tableB) => tableA.table_id - tableB.table_id)
+    //         )
+    //         .then(setTables)
+    //         .catch(setTableError);
+    
+    //     return () => abortController.abort();
+        
+    // }, []);
+    useEffect(() => {
 
         const abortController = new AbortController();
         setTableError(null);
         listTables(abortController.signal)
-            .then(setTable)
+            .then(setTables)
             .catch(setTableError);
         return () => abortController.abort();
 
@@ -61,7 +77,7 @@ function Table() {
                         </tr>
                     </thead>
                     <tbody className="table-group-divider">
-                        {table.map((tbl) => 
+                        {tables.map((tbl) => 
                             <tr key={tbl.table_id}>
                                 <td> {tbl.table_id} </td>
                                 <td> {tbl.table_name} </td>
@@ -76,7 +92,7 @@ function Table() {
                                         <button 
                                             data-table-id-finish={tbl.table_id}
                                             className="btn btn-primary ml-2"
-                                            onClick={() => handleClearTable(tbl.table_id, tbl.reservation_id)}
+                                            onClick={() => handleClearTable(tbl.table_id)}
                                         >
                                             Finish
                                         </button>

@@ -10,7 +10,7 @@ import { today, formatAsTime } from "../utils/date-time";
  */
 function EditReservation() {
 
-    const { reservation_id } = useParams();
+    const resId = useParams().reservation_id;
     
     // useState functions
     const [reservation, setReservation] = useState({
@@ -30,11 +30,11 @@ function EditReservation() {
     useEffect(() => {
         const abortController = new AbortController();
         setReservationsError(null);
-        findReservation(reservation_id, abortController.signal)
+        findReservation(resId, abortController.signal)
             .then(setReservation)
             .catch(setReservationsError);
         return () => abortController.abort();
-    }, [reservation_id]);
+    }, [resId]);
  
     return (
         <div>

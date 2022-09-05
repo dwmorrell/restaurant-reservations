@@ -7,12 +7,12 @@ import Table from "../tables/Table";
 /**
  * Defines the ReserationSeat component
  */
-function ReservationSeat({ loadDashboard }) {
+function ReservationSeat() {
 
     const history = useHistory();
  
-    const reservationId = useParams().reservation_id;
-
+    const reservationId = useParams().reservation_id
+    
     // useState functions
     const [table, setTable] = useState([]);
     const [tableId, setTableId] = useState(1);
@@ -30,7 +30,7 @@ function ReservationSeat({ loadDashboard }) {
             .catch(setTableError);
         return () => abortController.abort();
 
-    }, [table]);
+    }, []);
 
     /**
      * Handler for changes to the form field
@@ -47,13 +47,15 @@ function ReservationSeat({ loadDashboard }) {
      */
 	const handleSeatSubmit = async function (event) {
 		event.preventDefault();
+        const abortController = new AbortController()
         try {
-            await seatReservation(reservationId, tableId);
+            await seatReservation(reservationId, Number(tableId), abortController.signal);
             history.push(`/dashboard`);
 
         } catch(error) {
             setTableError(error);
         }
+        return () => abortController.abort();
 	};
 
     return (

@@ -178,12 +178,12 @@ describe("US-04 - Seat reservation - E2E", () => {
       });
 
       await selectOptionByText(page, "table_id", "#1 - 6");
-
+      console.log("*********", reservation)
       await page.screenshot({
         path: ".screenshots/us-04-seat-reservation-submit-before.png",
         fullPage: true,
       });
-
+      console.log("***************", reservation)
       await Promise.all([
         page.click("[type=submit]"),
         page.waitForNavigation({ waitUntil: "networkidle0" }),
