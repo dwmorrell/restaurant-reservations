@@ -221,6 +221,7 @@ async function create(req, res) {
 
   const newRes = res.locals.reservation;
   const data = await service.create(newRes);
+  data[0].people = Number(data[0].people)
   
   res.status(201).json({ data: data[0] });
 
@@ -251,7 +252,7 @@ async function edit(req, res) {
 async function list(req, res) {
 
   if (req.query.date) {
-    const { date } = req.query;
+    const { date } = req.query
     let data = [];
     data = await service.list(date);
     res.json({ data });
