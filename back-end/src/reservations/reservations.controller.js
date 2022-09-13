@@ -105,11 +105,9 @@ function validFuture(req, res, next) {
   const errorArray = [];
   const currentDate = asDateString(new Date());
   let [ currentYear, currentMonth, currentDay ] = currentDate.split('-');
-
   currentYear = Number(currentYear);
   currentMonth = Number(currentMonth);
   currentDay = Number(currentDay);
-
   const resDate = res.locals.reservation.reservation_date;
   let [ reservationYear, reservationMonth, reservationDay ] = resDate.split('-');
 

@@ -18,22 +18,6 @@ function Table() {
     // * useEffect function to list current tables
     // * Calls the listTables API
     // */
-    // useEffect(() => {
-
-    //     const abortController = new AbortController();
-
-    //     setTableError(null)
-    
-    //     listTables(abortController.signal)
-    //         .then((tables) =>
-    //         tables.sort((tableA, tableB) => tableA.table_id - tableB.table_id)
-    //         )
-    //         .then(setTables)
-    //         .catch(setTableError);
-    
-    //     return () => abortController.abort();
-        
-    // }, []);
     useEffect(() => {
 
         const abortController = new AbortController();

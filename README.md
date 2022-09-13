@@ -39,7 +39,7 @@ A full-stack app built using:
 - Navigation buttons: `Previous Day`, `Today`, & `Next Day` are available for changing the date displayed by the dashboard.
 - All tables (free or occupied) are also diplayed here.
 
-![dashboard](./front-end/.screenshots/Dashboard.png)
+![dashboard](./front-end/screenshots/Dashboard.png)
 
 ---
 
@@ -57,11 +57,11 @@ The menu provides options to:
 1. Enter the phone number for the reservation.
 1. Click `find`.
 
-![search](./front-end/.screenshots/searchBefore.png)
+![search](./front-end/screenshots/searchBefore.png)
 
 This will display any matching results.
 
-![searched](./front-end/.screenshots/searchAfter.png)
+![searched](./front-end/screenshots/searchAfter.png)
 
 ---
 
@@ -70,7 +70,7 @@ This will display any matching results.
 1. Fill out the form with the reservation information.
 1. Click `submit`.
 
-![newReservation](./front-end/.screenshots/MakeReservation.png)
+![newReservation](./front-end/screenshots/MakeReservation.png)
 
 ---
 
@@ -79,7 +79,7 @@ This will display any matching results.
 1. Fill out the form with the table information.
 1. Click `submit`.
 
-![newTable](./front-end/.screenshots/makeATable.png)
+![newTable](./front-end/screenshots/makeATable.png)
 
 ---
 
@@ -89,11 +89,11 @@ This will display any matching results.
 1. Select a table from the drop-down menu.
 1. Click `submit` to seat the reservation at the selected table.
 
-![selectTable](./front-end/.screenshots/seatingPage.png)
+![selectTable](./front-end/screenshots/seatingPage.png)
 
 Once a reservation is seated, the reservation status will change from `booked` to `seated`.
 
-![seated](./front-end/.screenshots/seatSubmit.png)
+![seated](./front-end/screenshots/seatSubmit.png)
 
 ---
 
@@ -102,7 +102,7 @@ Once a reservation is seated, the reservation status will change from `booked` t
 1. Click `finish` on the table that has finished.
 1. Click `OK` on the confirmation window that pops-up.
 
-![finishing](./front-end/.screenshots/finishedTable.png)
+![finishing](./front-end/screenshots/finishedTable.png)
 
 Note: finished reservations no longer display in the dashboard.
 
@@ -114,7 +114,7 @@ Note: finished reservations no longer display in the dashboard.
 1. Edit any of the reservation information as needed.
 1. Click `submit` to save the updated reservation information.
 
-![editing](./front-end/.screenshots/editReservation.png)
+![editing](./front-end/screenshots/editReservation.png)
 
 ---
 
@@ -123,7 +123,7 @@ Note: finished reservations no longer display in the dashboard.
 1. Click `cancel` on the reservation you'd like to cancel.
 1. Click `OK` on the confirmation window that pops-up.
 
-![cancelling](./front-end/.screenshots/cancelReservation.png)
+![cancelling](./front-end/screenshots/cancelReservation.png)
 
 Note: cancelled reservations no longer display in the dashboard.
 
