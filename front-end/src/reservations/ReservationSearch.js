@@ -28,7 +28,7 @@ function ReservationSearch() {
             const result = window.confirm("Do you want to cancel this reservation? This cannot be undone.");
             if (result) {
                 await cancelReservation(reservation_id);
-                history.go();
+                history.go(-1);
             }
         } catch(error) {
             setReservationsError(error);
@@ -136,7 +136,7 @@ function ReservationSearch() {
                                 {/* Displays the Cancel button */}
                                 {reservation.status === "booked" ?                             
                                     <button 
-                                        className="btn btn-warning ml-2"
+                                        className="btn btn-danger ml-2"
                                         data-reservation-id-cancel={reservation.reservation_id}
                                         onClick={handleCancelReservation}
                                         value={reservation.reservation_id}

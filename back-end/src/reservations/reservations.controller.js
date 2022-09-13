@@ -194,7 +194,6 @@ function validTime(req, res, next) {
 
   // convert reservation time to mintues
   const reservationTimeInMin = (reservationHour * 60) + reservationMinute;
-
   if(reservationTimeInMin < reservationsOpen) {
     errorArray.push(`The restaurant does not open before 10:30 AM.  Please select another time.`);
   } else if(reservationTimeInMin > reservationsClose) {
