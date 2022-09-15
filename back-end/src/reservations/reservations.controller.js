@@ -51,6 +51,7 @@ function validRes(req, res, next) {
   const errorArray = [];
   const dateFormat = /\d\d\d\d-\d\d-\d\d/;
   const timeFormat = /\d\d:\d\d/;
+  const mobileNumberFormat = /^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$/;
 
   if (!reservation.first_name || reservation.first_name === '') {
     errorArray.push('first_name');
@@ -60,7 +61,7 @@ function validRes(req, res, next) {
     errorArray.push('last_name');
   }
 
-  if (!reservation.mobile_number || reservation.mobile_number === '') {
+  if (!reservation.mobile_number || reservation.mobile_number === '' || !reservation.mobile_number.match(mobileNumberFormat)) {
     errorArray.push('mobile_number');
   }
 
