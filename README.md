@@ -1,7 +1,7 @@
 # Capstone: Restaurant Reservation System
 
 
-> Live app is available here:  https://restaurant-reservations-app.herokuapp.com/
+> Live app is available here:  https://restaurant-reservations-client-ob74.onrender.com/dashboard
 
 A full-stack app built using:
 - HTML
