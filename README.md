@@ -1,7 +1,7 @@
 # Capstone: Restaurant Reservation System
 
 
-> Live app is available here:  https://restaurant-reservations-client-ob74.onrender.com/dashboard
+> Live app is available here:  https://restaurant-reservations-client-ob74.onrender.com
 
 A full-stack app built using:
 - HTML
